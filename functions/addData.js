@@ -82,7 +82,9 @@ exports.handler = async function (event, context, callback) {
     ]
 
     try {
-        await posts.create()
+        for (let i = 0; i < data.length; i++) {
+            await posts.create(data[i].id, data[i])
+        }
 
         return {
             statusCode: 200
