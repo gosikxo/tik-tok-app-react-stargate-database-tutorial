@@ -87,13 +87,13 @@ exports.handler = async function (event, context, callback) {
         }
 
         return {
-            statusCode: 200
+            statusCode: 200,
         }
     } catch (e) {
-        console.error(e)
+        console.error(e);
         return {
             statusCode: 500,
-            body: JSON.stringify(e)
+            body: JSON.stringify(e),
         }
     }
 }
