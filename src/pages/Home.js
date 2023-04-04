@@ -24,19 +24,18 @@ export const Home = () => {
     if (users) {
         descendingUsers = users.sort((a, b) => a.id < b.id ? 1 : -1)
     }
-
     return (
         <>
             {descendingUsers && (
                 <div className='container'>
                     <FollowersColumn />
                     <div className='feed'>
-                        {descendingUsers.map((descendingUser, index) => {
+                        {descendingUsers.map((descendingUser, index) => (
                             <Card
                                 key={index}
                                 user={descendingUser}
                             />
-                        })}
+                        ))}
                     </div>
                     <div className='suggested-box'>
                         <div className='section'>
