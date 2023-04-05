@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef, useMemo } from 'react'
 import { FollowersColumn } from '../components/FollowersColumn'
 import axios from 'axios'
 import Card from '../components/Card'
+import MiniCard from '../components/MiniCard'
 
 export const Home = () => {
     const [users, setUsers] = useState(null)
@@ -25,13 +26,22 @@ export const Home = () => {
             return users.sort((a, b) => a.id < b.id ? 1 : -1)
         }
         return [];
-   }, [users])
+    }, [users])
 
-   const topFiveFollowing = useMemo(() => {
+    const topFiveFollowing = useMemo(() => {
         if (users) {
             const following = users.filter(user => user.is_followed === true)
             const descendingFollowing = following.sort((a, b) => a.likes < b.likes ? 1 : -1)
             return descendingFollowing.slice(0, 5)
+        }
+        return [];
+    }, [users])
+
+    const topFiveNotFollowing = useMemo(() => {
+        if (users) {
+            const notFollowing = users.filter(user => user.is_followed === false)
+            const descendingNotFollowing = notFollowing.sort((a, b) => a.likes < b.likes ? 1 : -1)
+            return descendingNotFollowing.slice(0, 5)
         }
         return [];
     }, [users])
@@ -54,6 +64,12 @@ export const Home = () => {
                             <div className='suggested'>
                                 <h2 className='bold'>Suggested accounts</h2>
                                 <div className='break'>
+                                    {users && topFiveNotFollowing.map((NotFollowingUser, index) => (
+                                        <MiniCard
+                                            key={index}
+                                            user={NotFollowingUser}
+                                        />
+                                    ))}
                                 </div>
                             </div>
                         </div>
