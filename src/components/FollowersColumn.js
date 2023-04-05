@@ -1,9 +1,8 @@
 import React from 'react'
-import MicroCard from '../components/MicroCard'
+import MicroCard from './MicroCard'
 
-export const FollowersColumn = ({topFiveFollowing}) => {
-    const users = topFiveFollowing
-
+export const FollowersColumn = (topFiveFollowing) => {
+    const users = topFiveFollowing.users
     return (
         <div className='followers-column'>
             <div className="followers-section">

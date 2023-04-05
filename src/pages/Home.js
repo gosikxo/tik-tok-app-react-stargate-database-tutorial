@@ -36,9 +36,6 @@ export const Home = () => {
         return [];
     }, [users])
 
-    
-    console.log({ users, topFiveFollowing, descendingUsers })
-
     return (
         <>
             {descendingUsers && (
