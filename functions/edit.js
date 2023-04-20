@@ -9,23 +9,22 @@ exports.handler = async function (event, context, callback) {
         applicationToken: process.env.ASTRA_DB_APPLICATION_TOKEN
     })
 
-    const posts = astraClient
+    const users = astraClient
         .namespace(process.env.ASTRA_DB_KEYSPACE)
         .collection(collection)
-
+    const body = JSON.parse(event.body)
 
     try {
-        const res = await posts.find()
-        return {
-            statusCode: 200,
-            body: JSON.stringify(Object.values(res.data)),
-        }
-    } catch (e) {
-        console.error(e)
+        users.update(body.userId, body.data)
 
         return {
+            statusCode: 200,
+        }
+    } catch (e) {
+        console.error(e);
+        return {
             statusCode: 500,
-            body: JSON.stringify(e)
+            body: JSON.stringify(e),
         }
     }
 }
